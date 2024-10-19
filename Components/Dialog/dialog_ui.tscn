@@ -1,0 +1,69 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1o348u7yswb7"]
+
+[ext_resource type="Script" path="res://Components/Dialog/dialog_ui.gd" id="1_2kipm"]
+[ext_resource type="Texture2D" uid="uid://coedmekp4cygg" path="res://Sprites/dialog_box.png" id="2_m8ae8"]
+[ext_resource type="FontFile" uid="uid://6v6xrxcjgxh0" path="res://Sprites/PublicPixel-z84yD.ttf" id="3_c0fle"]
+
+[node name="DialogUI" type="Control"]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2kipm")
+
+[node name="PlayerPortrait" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(0, 264)
+scale = Vector2(0.2, 0.2)
+centered = false
+
+[node name="NpcPortrait" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(768, 264)
+scale = Vector2(0.2, 0.2)
+centered = false
+flip_h = true
+
+[node name="TextBox" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 232.0
+offset_top = 448.0
+offset_right = 920.0
+offset_bottom = 632.0
+texture = ExtResource("2_m8ae8")
+region_rect = Rect2(0, 0, 1920, 1080)
+patch_margin_top = 8
+patch_margin_bottom = 8
+
+[node name="TextContainer" type="MarginContainer" parent="TextBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="TextLabel" type="Label" parent="TextBox/TextContainer"]
+custom_minimum_size = Vector2(648, 0)
+layout_mode = 2
+size_flags_vertical = 1
+theme_override_fonts/font = ExtResource("3_c0fle")
+text = "AAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+autowrap_mode = 2
+clip_text = true
+text_overrun_behavior = 3
+
+[node name="LetterDisplayTimer" type="Timer" parent="."]
+
+[node name="VoiceAudioPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -30.0
+max_polyphony = 3
+
+[connection signal="timeout" from="LetterDisplayTimer" to="." method="_on_letter_display_timer_timeout"]

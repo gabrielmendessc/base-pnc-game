@@ -1,0 +1,143 @@
+[gd_scene load_steps=28 format=3 uid="uid://cp3dykbkgfuem"]
+
+[ext_resource type="Script" path="res://Components/Input/room_c.gd" id="1_8rwlc"]
+[ext_resource type="PackedScene" uid="uid://dapeyhm1fj3s" path="res://Components/Inventory/inventory.tscn" id="2_ngmbd"]
+[ext_resource type="Texture2D" uid="uid://c7oodao1sxi3i" path="res://Sprites/bathroom_bg.png" id="2_vrrkv"]
+[ext_resource type="Script" path="res://Components/Input/background_c.gd" id="3_mkke8"]
+[ext_resource type="PackedScene" uid="uid://d1o348u7yswb7" path="res://Components/Dialog/dialog_ui.tscn" id="3_rrxh2"]
+[ext_resource type="PackedScene" uid="uid://egenpuqobsei" path="res://Components/Player/player.tscn" id="4_whase"]
+[ext_resource type="Script" path="res://Components/Action/trigger_c.gd" id="5_8hlov"]
+[ext_resource type="Script" path="res://Components/Action/condition_r.gd" id="7_4i3yn"]
+[ext_resource type="Resource" uid="uid://cjsc8re4gdv3k" path="res://Levels/Motel/Bathroom/Dialogs/sink_dialog.tres" id="8_b03m0"]
+[ext_resource type="Script" path="res://Components/Action/change_var_action_r.gd" id="9_gs56u"]
+[ext_resource type="Resource" uid="uid://dy5eqwr3yt2no" path="res://Levels/Motel/Bathroom/Dialogs/sink_dialog_default.tres" id="11_cl407"]
+[ext_resource type="Resource" uid="uid://cfj2116naf3or" path="res://Levels/Motel/Bathroom/Dialogs/bathtub_dialog.tres" id="12_i82qo"]
+[ext_resource type="Script" path="res://Components/Action/dialog_action_r.gd" id="13_etynl"]
+[ext_resource type="Resource" uid="uid://cs7aaqniujlv7" path="res://Resources/Characters/max_shaw.tres" id="14_mku8d"]
+[ext_resource type="Script" path="res://Components/Dialog/dialog_line_r.gd" id="15_utwch"]
+[ext_resource type="Script" path="res://Components/Dialog/dialog_r.gd" id="16_4cepl"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_24m8m"]
+vertices = PackedVector2Array(944, 328, 1112, 496, 1112, 640, 40, 640, 40, 504, 512, 368, 512, 328, 160, 368)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3, 4, 5), PackedInt32Array(5, 6, 0), PackedInt32Array(5, 4, 7)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(40, 640, 40, 504, 160, 368, 512, 368, 512, 328, 944, 328, 1112, 496, 1112, 640)])
+source_geometry_group_name = &"navigation_polygon_source_group"
+agent_radius = 0.0
+
+[sub_resource type="Resource" id="Resource_fg51i"]
+script = ExtResource("13_etynl")
+dialog = ExtResource("8_b03m0")
+enabled = true
+oneshot = true
+
+[sub_resource type="Resource" id="Resource_133yd"]
+script = ExtResource("7_4i3yn")
+has_vars = Array[String](["triggered_motel_sink"])
+has_items = Array[Resource("res://Components/Inventory/item_r.gd")]([])
+
+[sub_resource type="Resource" id="Resource_ftnyl"]
+script = ExtResource("13_etynl")
+dialog = ExtResource("11_cl407")
+condition = SubResource("Resource_133yd")
+enabled = true
+oneshot = false
+
+[sub_resource type="Resource" id="Resource_8jj5k"]
+script = ExtResource("9_gs56u")
+variables = {
+"triggered_motel_sink": true
+}
+enabled = true
+oneshot = true
+
+[sub_resource type="Resource" id="Resource_juhra"]
+script = ExtResource("13_etynl")
+dialog = ExtResource("12_i82qo")
+enabled = true
+oneshot = true
+
+[sub_resource type="Resource" id="Resource_nibve"]
+script = ExtResource("7_4i3yn")
+has_vars = Array[String](["triggered_motel_bathtub"])
+has_items = Array[Resource("res://Components/Inventory/item_r.gd")]([])
+
+[sub_resource type="Resource" id="Resource_c06vx"]
+script = ExtResource("15_utwch")
+actions = Array[Resource("res://Components/Action/action_r.gd")]([])
+character = ExtResource("14_mku8d")
+emotion = 0
+text = "I need to find out what the hell is happening here."
+choices = Array[Resource("res://Components/Dialog/choice_r.gd")]([])
+next_dialog = ""
+
+[sub_resource type="Resource" id="Resource_eati6"]
+script = ExtResource("16_4cepl")
+lines = Array[ExtResource("15_utwch")]([SubResource("Resource_c06vx")])
+
+[sub_resource type="Resource" id="Resource_dclmc"]
+script = ExtResource("13_etynl")
+dialog = SubResource("Resource_eati6")
+condition = SubResource("Resource_nibve")
+enabled = true
+oneshot = false
+
+[sub_resource type="Resource" id="Resource_26563"]
+script = ExtResource("9_gs56u")
+variables = {
+"triggered_motel_bathtub": true
+}
+enabled = true
+oneshot = true
+
+[node name="Bathroom" type="Node" node_paths=PackedStringArray("player", "inventory", "dialog")]
+script = ExtResource("1_8rwlc")
+player = NodePath("Actors/Player")
+inventory = NodePath("UI/Inventory")
+dialog = NodePath("UI/DialogUI")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Inventory" parent="UI" instance=ExtResource("2_ngmbd")]
+
+[node name="DialogUI" parent="UI" instance=ExtResource("3_rrxh2")]
+
+[node name="Terrain" type="Node2D" parent="."]
+
+[node name="BathroomBackground" type="Sprite2D" parent="Terrain"]
+scale = Vector2(0.60251, 0.603914)
+texture = ExtResource("2_vrrkv")
+centered = false
+script = ExtResource("3_mkke8")
+
+[node name="WalkableArea" type="NavigationRegion2D" parent="Terrain"]
+navigation_polygon = SubResource("NavigationPolygon_24m8m")
+
+[node name="Actors" type="Node2D" parent="."]
+
+[node name="Player" parent="Actors" instance=ExtResource("4_whase")]
+position = Vector2(568, 384)
+scale = Vector2(5, 5)
+
+[node name="Triggers" type="Node2D" parent="."]
+
+[node name="SinkTrigger" type="Area2D" parent="Triggers" node_paths=PackedStringArray("trigger_pos")]
+script = ExtResource("5_8hlov")
+trigger_pos = NodePath("SinkPos")
+actions = Array[Resource("res://Components/Action/action_r.gd")]([SubResource("Resource_fg51i"), SubResource("Resource_ftnyl"), SubResource("Resource_8jj5k")])
+
+[node name="SinkCollision" type="CollisionPolygon2D" parent="Triggers/SinkTrigger"]
+polygon = PackedVector2Array(744, 152, 872, 152, 872, 280, 744, 280)
+
+[node name="SinkPos" type="Marker2D" parent="Triggers/SinkTrigger"]
+position = Vector2(808, 328)
+
+[node name="BathtubTrigger" type="Area2D" parent="Triggers" node_paths=PackedStringArray("trigger_pos")]
+script = ExtResource("5_8hlov")
+trigger_pos = NodePath("BathtubPos")
+actions = Array[Resource("res://Components/Action/action_r.gd")]([SubResource("Resource_juhra"), SubResource("Resource_dclmc"), SubResource("Resource_26563")])
+
+[node name="BathtubCollision" type="CollisionPolygon2D" parent="Triggers/BathtubTrigger"]
+polygon = PackedVector2Array(152, 360, 472, 360, 488, 336, 488, 240, 336, 240, 320, 224, 224, 224, 208, 192, 168, 192, 168, 232, 152, 256)
+
+[node name="BathtubPos" type="Marker2D" parent="Triggers/BathtubTrigger"]
+position = Vector2(312, 368)

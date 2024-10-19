@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="DialogR" load_steps=5 format=3 uid="uid://cjsc8re4gdv3k"]
+
+[ext_resource type="Script" path="res://Components/Dialog/dialog_line_r.gd" id="1_0yjbo"]
+[ext_resource type="Script" path="res://Components/Dialog/dialog_r.gd" id="2_bvmfd"]
+
+[sub_resource type="Resource" id="Resource_liygp"]
+script = ExtResource("1_0yjbo")
+actions = Array[Resource("res://Components/Action/action_r.gd")]([])
+emotion = 0
+text = "You wash your face."
+choices = Array[Resource("res://Components/Dialog/choice_r.gd")]([])
+next_dialog = ""
+
+[sub_resource type="Resource" id="Resource_6uqar"]
+script = ExtResource("1_0yjbo")
+actions = Array[Resource("res://Components/Action/action_r.gd")]([])
+emotion = 0
+text = "You're felling calmier now."
+choices = Array[Resource("res://Components/Dialog/choice_r.gd")]([])
+next_dialog = ""
+
+[resource]
+script = ExtResource("2_bvmfd")
+lines = Array[ExtResource("1_0yjbo")]([SubResource("Resource_liygp"), SubResource("Resource_6uqar")])

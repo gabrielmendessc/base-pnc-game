@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="CharacterR" load_steps=6 format=3 uid="uid://cs7aaqniujlv7"]
+
+[ext_resource type="AudioStream" uid="uid://ccg5cfrwf0q4l" path="res://Audio/max_dialog.ogg" id="1_b8fxf"]
+[ext_resource type="Script" path="res://Components/Dialog/portrait_r.gd" id="1_iuah0"]
+[ext_resource type="Script" path="res://Components/Dialog/character_r.gd" id="1_og32p"]
+[ext_resource type="Texture2D" uid="uid://bpky224ja3vfc" path="res://Sprites/max_shaw_portrait.png" id="2_y7y4f"]
+
+[sub_resource type="Resource" id="Resource_2x18g"]
+script = ExtResource("1_iuah0")
+texture = ExtResource("2_y7y4f")
+emotion = 0
+
+[resource]
+script = ExtResource("1_og32p")
+character = "max_shaw"
+npc = false
+portraits = Array[ExtResource("1_iuah0")]([SubResource("Resource_2x18g")])
+audio = ExtResource("1_b8fxf")

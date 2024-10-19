@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://dapeyhm1fj3s"]
+
+[ext_resource type="Script" path="res://Components/Inventory/inventory_c.gd" id="1_1gi7f"]
+[ext_resource type="Script" path="res://Components/Inventory/inventory_r.gd" id="2_2dpu7"]
+[ext_resource type="PackedScene" uid="uid://dcicag87lm50v" path="res://Components/Inventory/slot.tscn" id="2_w2jf6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qakd6"]
+
+[sub_resource type="Resource" id="Resource_5xmnu"]
+script = ExtResource("2_2dpu7")
+items = Array[Resource("res://Components/Inventory/item_r.gd")]([null, null, null, null, null])
+
+[node name="InventoryUI" type="PanelContainer"]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_qakd6")
+script = ExtResource("1_1gi7f")
+inventory_res = SubResource("Resource_5xmnu")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 2
+
+[node name="InventoryContainer" type="MarginContainer" parent="Control"]
+layout_mode = 2
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="SlotGrid" type="GridContainer" parent="Control/InventoryContainer"]
+layout_mode = 2
+
+[node name="GrabbedSlot" parent="." instance=ExtResource("2_w2jf6")]
+visible = false
+layout_mode = 2
+mouse_filter = 2
+is_slot_visible = false

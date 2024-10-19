@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="DialogR" load_steps=5 format=3 uid="uid://dy5eqwr3yt2no"]
+
+[ext_resource type="Resource" uid="uid://cs7aaqniujlv7" path="res://Resources/Characters/max_shaw.tres" id="1_5bv0y"]
+[ext_resource type="Script" path="res://Components/Dialog/dialog_line_r.gd" id="2_10brc"]
+[ext_resource type="Script" path="res://Components/Dialog/dialog_r.gd" id="3_8q4cc"]
+
+[sub_resource type="Resource" id="Resource_egtyx"]
+script = ExtResource("2_10brc")
+actions = Array[Resource("res://Components/Action/action_r.gd")]([])
+character = ExtResource("1_5bv0y")
+emotion = 0
+text = "No need to wash my face again."
+choices = Array[Resource("res://Components/Dialog/choice_r.gd")]([])
+next_dialog = ""
+
+[resource]
+script = ExtResource("3_8q4cc")
+lines = Array[ExtResource("2_10brc")]([SubResource("Resource_egtyx")])

@@ -1,0 +1,36 @@
+[gd_resource type="Resource" script_class="DialogR" load_steps=7 format=3 uid="uid://cfj2116naf3or"]
+
+[ext_resource type="Script" path="res://Components/Dialog/dialog_r.gd" id="1_7a7vc"]
+[ext_resource type="Resource" uid="uid://cs7aaqniujlv7" path="res://Resources/Characters/max_shaw.tres" id="1_018kb"]
+[ext_resource type="Script" path="res://Components/Dialog/dialog_line_r.gd" id="2_1up4y"]
+
+[sub_resource type="Resource" id="Resource_0lctf"]
+script = ExtResource("2_1up4y")
+actions = Array[Resource("res://Components/Action/action_r.gd")]([])
+character = ExtResource("1_018kb")
+emotion = 0
+text = "What the f.... wait!"
+choices = Array[Resource("res://Components/Dialog/choice_r.gd")]([])
+next_dialog = ""
+
+[sub_resource type="Resource" id="Resource_ulmt0"]
+script = ExtResource("2_1up4y")
+actions = Array[Resource("res://Components/Action/action_r.gd")]([])
+character = ExtResource("1_018kb")
+emotion = 0
+text = "This face is familiar."
+choices = Array[Resource("res://Components/Dialog/choice_r.gd")]([])
+next_dialog = ""
+
+[sub_resource type="Resource" id="Resource_oogb0"]
+script = ExtResource("2_1up4y")
+actions = Array[Resource("res://Components/Action/action_r.gd")]([])
+character = ExtResource("1_018kb")
+emotion = 0
+text = "I need to find out what the hell is happening here."
+choices = Array[Resource("res://Components/Dialog/choice_r.gd")]([])
+next_dialog = ""
+
+[resource]
+script = ExtResource("1_7a7vc")
+lines = Array[ExtResource("2_1up4y")]([SubResource("Resource_0lctf"), SubResource("Resource_ulmt0"), SubResource("Resource_oogb0")])

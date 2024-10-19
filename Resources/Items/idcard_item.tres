@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="ItemR" load_steps=3 format=3 uid="uid://cfno7iuiuu56i"]
+
+[ext_resource type="Script" path="res://Components/Inventory/item_r.gd" id="1_1wqfx"]
+[ext_resource type="Texture2D" uid="uid://blns41u3cae1e" path="res://Sprites/idcard_item.png" id="2_1gkb3"]
+
+[resource]
+script = ExtResource("1_1wqfx")
+name = "ID Card"
+texture = ExtResource("2_1gkb3")
+description = "He looks familiar."
